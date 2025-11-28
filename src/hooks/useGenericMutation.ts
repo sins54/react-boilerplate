@@ -25,7 +25,10 @@ export interface MutationVariables<D = unknown> {
  * Options for the useGenericMutation hook.
  */
 export interface UseGenericMutationOptions<T, D = unknown>
-  extends Omit<UseMutationOptions<T, Error, MutationVariables<D>>, "mutationFn"> {
+  extends Omit<
+    UseMutationOptions<T, Error, MutationVariables<D>>,
+    "mutationFn" | "onSettled"
+  > {
   /** HTTP method to use */
   method: MutationMethod;
   /** Base URL for the endpoint */
@@ -34,6 +37,12 @@ export interface UseGenericMutationOptions<T, D = unknown>
   invalidateKeys?: string[][];
   /** Axios config for custom headers or token override */
   axiosConfig?: AxiosRequestConfig;
+  /** Callback when mutation settles (success or error) */
+  onSettled?: (
+    data: T | undefined,
+    error: Error | null,
+    variables: MutationVariables<D>
+  ) => void;
 }
 
 /**
@@ -91,8 +100,14 @@ export interface UseGenericMutationOptions<T, D = unknown>
 export function useGenericMutation<T, D = unknown>(
   options: UseGenericMutationOptions<T, D>
 ) {
-  const { method, url, invalidateKeys, axiosConfig, ...mutationOptions } =
-    options;
+  const {
+    method,
+    url,
+    invalidateKeys,
+    axiosConfig,
+    onSettled: userOnSettled,
+    ...mutationOptions
+  } = options;
   const queryClient = useQueryClient();
 
   const mutationFn = async (variables: MutationVariables<D>): Promise<T> => {
@@ -115,7 +130,7 @@ export function useGenericMutation<T, D = unknown>(
   return useMutation<T, Error, MutationVariables<D>>({
     mutationFn,
     ...mutationOptions,
-    onSettled: (data, error, variables, context) => {
+    onSettled: (data, error, variables) => {
       // Invalidate specified query keys on success
       if (!error && invalidateKeys) {
         invalidateKeys.forEach((key) => {
@@ -123,10 +138,7 @@ export function useGenericMutation<T, D = unknown>(
         });
       }
       // Call user's onSettled if provided
-      if (mutationOptions.onSettled) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (mutationOptions.onSettled as any)(data, error, variables, undefined, context);
-      }
+      userOnSettled?.(data, error, variables);
     },
   });
 }

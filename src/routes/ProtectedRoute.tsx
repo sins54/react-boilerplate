@@ -90,7 +90,7 @@ export function ProtectedRoute({
   fallbackComponent,
   children,
 }: ProtectedRouteProps) {
-  const { hasPermission, hasAnyPermission, isLoading } = useAuth();
+  const { hasPermission, hasAnyPermission, hasAnyPermissionForScreen, isLoading } = useAuth();
 
   // Show nothing while checking auth status
   if (isLoading) {
@@ -111,9 +111,8 @@ export function ProtectedRoute({
     }));
     hasAccess = hasAnyPermission(permissionsToCheck);
   } else {
-    // No specific privilege required, just check if user has any permission for this screen
-    // This is useful for layout routes where we just want to ensure some access to the screen
-    hasAccess = true;
+    // No specific privilege required, check if user has any permission for this screen
+    hasAccess = hasAnyPermissionForScreen(screen);
   }
 
   // Handle denied access
