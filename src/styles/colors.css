@@ -1,0 +1,148 @@
+/**
+ * Design System - Semantic Color Variables
+ * 
+ * These CSS variables define the color palette for Light and Dark modes.
+ * IMPORTANT: Always use these variables instead of hardcoded hex values.
+ * 
+ * Usage: var(--color-primary), var(--color-bg), etc.
+ */
+
+/* Light Mode (default) */
+:root {
+  /* Primary colors */
+  --color-primary: #3b82f6;
+  --color-primary-hover: #2563eb;
+  --color-primary-active: #1d4ed8;
+  
+  /* Background colors */
+  --color-bg: #ffffff;
+  --color-bg-secondary: #f8fafc;
+  
+  /* Surface colors */
+  --color-surface: #ffffff;
+  --color-surface-hover: #f1f5f9;
+  --color-surface-active: #e2e8f0;
+  --color-surface-elevated: #ffffff;
+  
+  /* Text colors */
+  --color-text: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-muted: #94a3b8;
+  --color-text-on-primary: #ffffff;
+  
+  /* Border colors */
+  --color-border: #e2e8f0;
+  --color-border-hover: #cbd5e1;
+  
+  /* Error colors */
+  --color-error: #ef4444;
+  --color-error-hover: #dc2626;
+  --color-error-bg: #fef2f2;
+  --color-error-text: #991b1b;
+  
+  /* Success colors */
+  --color-success: #22c55e;
+  --color-success-hover: #16a34a;
+  --color-success-bg: #f0fdf4;
+  --color-success-text: #166534;
+  
+  /* Warning colors */
+  --color-warning: #f59e0b;
+  --color-warning-hover: #d97706;
+  --color-warning-bg: #fffbeb;
+  --color-warning-text: #92400e;
+}
+
+/* Dark Mode */
+.dark {
+  /* Primary colors */
+  --color-primary: #60a5fa;
+  --color-primary-hover: #3b82f6;
+  --color-primary-active: #2563eb;
+  
+  /* Background colors */
+  --color-bg: #0f172a;
+  --color-bg-secondary: #1e293b;
+  
+  /* Surface colors */
+  --color-surface: #1e293b;
+  --color-surface-hover: #334155;
+  --color-surface-active: #475569;
+  --color-surface-elevated: #334155;
+  
+  /* Text colors */
+  --color-text: #f8fafc;
+  --color-text-secondary: #cbd5e1;
+  --color-text-muted: #64748b;
+  --color-text-on-primary: #0f172a;
+  
+  /* Border colors */
+  --color-border: #334155;
+  --color-border-hover: #475569;
+  
+  /* Error colors */
+  --color-error: #f87171;
+  --color-error-hover: #ef4444;
+  --color-error-bg: #450a0a;
+  --color-error-text: #fecaca;
+  
+  /* Success colors */
+  --color-success: #4ade80;
+  --color-success-hover: #22c55e;
+  --color-success-bg: #052e16;
+  --color-success-text: #bbf7d0;
+  
+  /* Warning colors */
+  --color-warning: #fbbf24;
+  --color-warning-hover: #f59e0b;
+  --color-warning-bg: #451a03;
+  --color-warning-text: #fde68a;
+}
+
+/* System preference based dark mode (fallback if no .dark class) */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    /* Primary colors */
+    --color-primary: #60a5fa;
+    --color-primary-hover: #3b82f6;
+    --color-primary-active: #2563eb;
+    
+    /* Background colors */
+    --color-bg: #0f172a;
+    --color-bg-secondary: #1e293b;
+    
+    /* Surface colors */
+    --color-surface: #1e293b;
+    --color-surface-hover: #334155;
+    --color-surface-active: #475569;
+    --color-surface-elevated: #334155;
+    
+    /* Text colors */
+    --color-text: #f8fafc;
+    --color-text-secondary: #cbd5e1;
+    --color-text-muted: #64748b;
+    --color-text-on-primary: #0f172a;
+    
+    /* Border colors */
+    --color-border: #334155;
+    --color-border-hover: #475569;
+    
+    /* Error colors */
+    --color-error: #f87171;
+    --color-error-hover: #ef4444;
+    --color-error-bg: #450a0a;
+    --color-error-text: #fecaca;
+    
+    /* Success colors */
+    --color-success: #4ade80;
+    --color-success-hover: #22c55e;
+    --color-success-bg: #052e16;
+    --color-success-text: #bbf7d0;
+    
+    /* Warning colors */
+    --color-warning: #fbbf24;
+    --color-warning-hover: #f59e0b;
+    --color-warning-bg: #451a03;
+    --color-warning-text: #fde68a;
+  }
+}
