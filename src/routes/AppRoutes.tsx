@@ -174,7 +174,14 @@ export function AppRoutes() {
           }
         />
 
-        {/* Component Showcase - accessible to any authenticated user */}
+        {/* 
+         * Component Showcase - accessible to any authenticated user
+         * This route is inside PrivateRoute so authentication is required.
+         * No ProtectedRoute wrapper means any logged-in user can access it.
+         * 
+         * Note: In App.tsx, a public version of this route is available for development.
+         * When implementing full authentication, this is the production-ready version.
+         */}
         <Route
           path="/showcase"
           element={

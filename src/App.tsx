@@ -1,8 +1,12 @@
+import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthProvider } from './context/AuthContext';
 import DesignSystemPage from './pages/DesignSystemPage';
 import ComponentShowcasePage from './pages/ComponentShowcasePage';
+
+// Lazy-loaded pages for code splitting
+const ShowcasePage = lazy(() => import('./pages/ShowcasePage'));
 
 // Create query client with sensible defaults
 const queryClient = new QueryClient({
@@ -14,6 +18,27 @@ const queryClient = new QueryClient({
     },
   },
 });
+
+// Loading fallback component
+function PageLoader() {
+  return (
+    <div
+      className="flex items-center justify-center min-h-screen"
+      style={{ backgroundColor: "var(--color-bg)", color: "var(--color-text)" }}
+    >
+      <div className="text-center">
+        <div
+          className="w-8 h-8 border-4 rounded-full animate-spin mx-auto mb-4"
+          style={{
+            borderColor: "var(--color-border)",
+            borderTopColor: "var(--color-primary)",
+          }}
+        />
+        <p style={{ color: "var(--color-text-muted)" }}>Loading...</p>
+      </div>
+    </div>
+  );
+}
 
 function HomePage() {
   return (
@@ -79,19 +104,19 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/design-system" element={<DesignSystemPage />} />
             <Route path="/components" element={<ComponentShowcasePage />} />
-            <Route path="/showcase" element={<ShowcaseRedirect />} />
+            <Route 
+              path="/showcase" 
+              element={
+                <Suspense fallback={<PageLoader />}>
+                  <ShowcasePage />
+                </Suspense>
+              } 
+            />
           </Routes>
         </BrowserRouter>
       </AuthProvider>
     </QueryClientProvider>
   );
-}
-
-// For public access demo (since auth isn't fully set up), we import ShowcasePage directly
-import ShowcasePage from './pages/ShowcasePage';
-
-function ShowcaseRedirect() {
-  return <ShowcasePage />;
 }
 
 export default App;

@@ -60,7 +60,10 @@ type Theme = "light" | "dark" | "system";
 
 /**
  * ShowcasePage - A comprehensive visual test suite for all UI components.
- * Serves as a protected route (/showcase) to verify Light/Dark mode toggling instantly.
+ * This page displays all available components and allows instant Light/Dark mode toggling.
+ * 
+ * Access: Public in development, can be wrapped with ProtectedRoute in production.
+ * Route: /showcase
  */
 export default function ShowcasePage() {
   const [dialogOpen, setDialogOpen] = useState(false);
