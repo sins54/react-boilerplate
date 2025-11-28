@@ -1,7 +1,32 @@
+import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import { PublicRoute } from "./PublicRoute";
 import { PrivateRoute } from "./PrivateRoute";
 import { ProtectedRoute } from "./ProtectedRoute";
+
+// Lazy-loaded page components for code splitting
+const ShowcasePage = lazy(() => import("../pages/ShowcasePage"));
+
+// Loading fallback component
+function PageLoader() {
+  return (
+    <div
+      className="flex items-center justify-center min-h-screen"
+      style={{ backgroundColor: "var(--color-bg)", color: "var(--color-text)" }}
+    >
+      <div className="text-center">
+        <div
+          className="w-8 h-8 border-4 rounded-full animate-spin mx-auto mb-4"
+          style={{
+            borderColor: "var(--color-border)",
+            borderTopColor: "var(--color-primary)",
+          }}
+        />
+        <p style={{ color: "var(--color-text-muted)" }}>Loading...</p>
+      </div>
+    </div>
+  );
+}
 
 // Placeholder components - replace with your actual page components
 // These are here for demonstration purposes
@@ -146,6 +171,16 @@ export function AppRoutes() {
               {/* Replace with your SettingsPage component */}
               <div>Settings</div>
             </ProtectedRoute>
+          }
+        />
+
+        {/* Component Showcase - accessible to any authenticated user */}
+        <Route
+          path="/showcase"
+          element={
+            <Suspense fallback={<PageLoader />}>
+              <ShowcasePage />
+            </Suspense>
           }
         />
       </Route>
