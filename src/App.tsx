@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import DesignSystemPage from './pages/DesignSystemPage';
+import ComponentShowcasePage from './pages/ComponentShowcasePage';
 
 function HomePage() {
   return (
@@ -19,16 +20,29 @@ function HomePage() {
       >
         Modern React boilerplate with Tailwind CSS v4
       </p>
-      <Link 
-        to="/design-system"
-        className="px-6 py-3 rounded-lg font-medium transition-colors"
-        style={{ 
-          backgroundColor: 'var(--color-primary)',
-          color: 'var(--color-text-on-primary)'
-        }}
-      >
-        View Design System →
-      </Link>
+      <div className="flex gap-4">
+        <Link 
+          to="/design-system"
+          className="px-6 py-3 rounded-lg font-medium transition-colors"
+          style={{ 
+            backgroundColor: 'var(--color-primary)',
+            color: 'var(--color-text-on-primary)'
+          }}
+        >
+          View Design System →
+        </Link>
+        <Link 
+          to="/components"
+          className="px-6 py-3 rounded-lg font-medium transition-colors border"
+          style={{ 
+            backgroundColor: 'var(--color-surface)',
+            color: 'var(--color-text)',
+            borderColor: 'var(--color-border)'
+          }}
+        >
+          Component Library →
+        </Link>
+      </div>
     </div>
   );
 }
@@ -39,6 +53,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/design-system" element={<DesignSystemPage />} />
+        <Route path="/components" element={<ComponentShowcasePage />} />
       </Routes>
     </BrowserRouter>
   );
