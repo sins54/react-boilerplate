@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthProvider } from './context/AuthContext';
 import DesignSystemPage from './pages/DesignSystemPage';
 import ComponentShowcasePage from './pages/ComponentShowcasePage';
+import FormShowcasePage from './pages/FormShowcasePage';
 
 // Lazy-loaded pages for code splitting
 const ShowcasePage = lazy(() => import('./pages/ShowcasePage'));
@@ -81,6 +82,16 @@ function HomePage() {
           Component Library →
         </Link>
         <Link 
+          to="/forms"
+          className="px-6 py-3 rounded-lg font-medium transition-colors border"
+          style={{ 
+            backgroundColor: 'var(--color-warning)',
+            color: 'var(--color-text-on-primary)'
+          }}
+        >
+          Form System →
+        </Link>
+        <Link 
           to="/showcase"
           className="px-6 py-3 rounded-lg font-medium transition-colors border"
           style={{ 
@@ -104,6 +115,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/design-system" element={<DesignSystemPage />} />
             <Route path="/components" element={<ComponentShowcasePage />} />
+            <Route path="/forms" element={<FormShowcasePage />} />
             <Route 
               path="/showcase" 
               element={
