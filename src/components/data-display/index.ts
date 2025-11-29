@@ -39,3 +39,32 @@ export {
   type AvatarImageProps,
   type AvatarFallbackProps,
 } from "./Avatar";
+
+// Table Components
+export {
+  ClientTable,
+  ServerTable,
+  TableToolbar,
+  TablePagination,
+  ActiveFiltersList,
+  FilterSheet,
+  TableSkeleton,
+  TableEmptyState,
+  DataTableBase,
+  TableFilterProvider,
+  useTableFilter,
+  type TableToolbarProps,
+  type TablePaginationProps,
+  type ActiveFilter,
+  type ActiveFiltersListProps,
+  type FilterSheetProps,
+  type TableSkeletonProps,
+  type TableEmptyStateProps,
+  type DataTableBaseProps,
+  type TableFilterProviderProps,
+  type BaseTableProps,
+  type ClientTableProps,
+  type ServerTableProps,
+  type ServerTableState,
+  type ColumnFilterDef,
+} from "./table";

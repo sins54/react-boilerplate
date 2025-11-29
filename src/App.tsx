@@ -11,6 +11,8 @@ import DashboardDemoPage from './pages/DashboardDemoPage';
 
 // Lazy-loaded pages for code splitting
 const ShowcasePage = lazy(() => import('./pages/ShowcasePage'));
+const ClientTablePage = lazy(() => import('./pages/tables/ClientTablePage'));
+const ServerTablePage = lazy(() => import('./pages/tables/ServerTablePage'));
 
 // Create query client with sensible defaults
 const queryClient = new QueryClient({
@@ -126,6 +128,26 @@ function HomePage() {
         >
           Dashboard Layout Demo →
         </Link>
+        <Link 
+          to="/tables/client"
+          className="px-6 py-3 rounded-lg font-medium transition-colors border"
+          style={{ 
+            backgroundColor: 'var(--color-primary)',
+            color: 'var(--color-text-on-primary)'
+          }}
+        >
+          Client Table →
+        </Link>
+        <Link 
+          to="/tables/server"
+          className="px-6 py-3 rounded-lg font-medium transition-colors border"
+          style={{ 
+            backgroundColor: 'var(--color-primary)',
+            color: 'var(--color-text-on-primary)'
+          }}
+        >
+          Server Table →
+        </Link>
       </div>
     </div>
   );
@@ -149,6 +171,22 @@ function App() {
                 element={
                   <Suspense fallback={<PageLoader />}>
                     <ShowcasePage />
+                  </Suspense>
+                } 
+              />
+              <Route 
+                path="/tables/client" 
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <ClientTablePage />
+                  </Suspense>
+                } 
+              />
+              <Route 
+                path="/tables/server" 
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <ServerTablePage />
                   </Suspense>
                 } 
               />
