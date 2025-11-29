@@ -13,6 +13,7 @@ import DashboardDemoPage from '@/pages/DashboardDemoPage';
 const ShowcasePage = lazy(() => import('@/pages/ShowcasePage'));
 const ClientTablePage = lazy(() => import('@/pages/tables/ClientTablePage'));
 const ServerTablePage = lazy(() => import('@/pages/tables/ServerTablePage'));
+const KitchenSinkPage = lazy(() => import('@/pages/demo/KitchenSinkPage'));
 
 // Create query client with sensible defaults
 const queryClient = new QueryClient({
@@ -149,6 +150,16 @@ function HomePage() {
         >
           Server Table →
         </Link>
+        <Link 
+          to="/demo/kitchen-sink"
+          className="px-6 py-3 rounded-lg font-medium transition-colors border"
+          style={{ 
+            backgroundColor: 'var(--color-error)',
+            color: 'var(--color-text-on-primary)'
+          }}
+        >
+          Kitchen Sink Demo →
+        </Link>
       </div>
     </div>
   );
@@ -188,6 +199,14 @@ function App() {
                 element={
                   <Suspense fallback={<PageLoader />}>
                     <ServerTablePage />
+                  </Suspense>
+                } 
+              />
+              <Route 
+                path="/demo/kitchen-sink" 
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <KitchenSinkPage />
                   </Suspense>
                 } 
               />

@@ -8,7 +8,8 @@ export type Screen =
   | "USERS"
   | "DASHBOARD"
   | "SETTINGS"
-  | "REPORTS";
+  | "REPORTS"
+  | "DEMO";
 
 /**
  * Privileges/actions that can be performed on screens.
