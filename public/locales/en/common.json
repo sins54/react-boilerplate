@@ -1,0 +1,62 @@
+{
+  "appName": "App Name",
+  "buttons": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "close": "Close",
+    "confirm": "Confirm",
+    "back": "Back",
+    "next": "Next"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "badges": "Badges",
+    "projects": "Projects",
+    "users": "Users",
+    "reports": "Reports",
+    "settings": "Settings",
+    "collapse": "Collapse",
+    "expand": "Expand"
+  },
+  "user": {
+    "profile": "Profile",
+    "logout": "Logout",
+    "settings": "Settings"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "toggle": "Toggle theme"
+  },
+  "language": {
+    "select": "Select language",
+    "current": "Language"
+  },
+  "table": {
+    "pagination": {
+      "showing": "Showing {{from}} to {{to}} of {{total}} results",
+      "page": "Page {{current}} of {{total}}",
+      "perPage": "Items per page",
+      "first": "First",
+      "last": "Last",
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "search": "Search...",
+    "noResults": "No results found",
+    "loading": "Loading..."
+  },
+  "errors": {
+    "somethingWentWrong": "Something went wrong",
+    "pageNotFound": "Page not found",
+    "unauthorized": "Unauthorized",
+    "tryAgain": "Try again"
+  },
+  "loading": "Loading...",
+  "copyright": "© {{year}} Your Company"
+}

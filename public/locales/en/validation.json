@@ -1,0 +1,16 @@
+{
+  "required": "{{field}} is required",
+  "email": "Please enter a valid email address",
+  "min": "{{field}} must be at least {{min}} characters",
+  "max": "{{field}} must be at most {{max}} characters",
+  "number": "{{field}} must be a number",
+  "positive": "{{field}} must be a positive number",
+  "integer": "{{field}} must be an integer",
+  "url": "Please enter a valid URL",
+  "date": "Please enter a valid date",
+  "passwordMismatch": "Passwords do not match",
+  "invalidType": "Invalid input type",
+  "invalidFormat": "Invalid format",
+  "tooSmall": "Value is too small",
+  "tooBig": "Value is too large"
+}

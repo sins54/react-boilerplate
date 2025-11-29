@@ -1,0 +1,62 @@
+{
+  "appName": "앱 이름",
+  "buttons": {
+    "save": "저장",
+    "cancel": "취소",
+    "submit": "제출",
+    "delete": "삭제",
+    "edit": "편집",
+    "create": "만들기",
+    "close": "닫기",
+    "confirm": "확인",
+    "back": "뒤로",
+    "next": "다음"
+  },
+  "navigation": {
+    "dashboard": "대시보드",
+    "badges": "뱃지",
+    "projects": "프로젝트",
+    "users": "사용자",
+    "reports": "보고서",
+    "settings": "설정",
+    "collapse": "접기",
+    "expand": "펼치기"
+  },
+  "user": {
+    "profile": "프로필",
+    "logout": "로그아웃",
+    "settings": "설정"
+  },
+  "theme": {
+    "light": "라이트",
+    "dark": "다크",
+    "system": "시스템",
+    "toggle": "테마 전환"
+  },
+  "language": {
+    "select": "언어 선택",
+    "current": "언어"
+  },
+  "table": {
+    "pagination": {
+      "showing": "총 {{total}}개 중 {{from}}-{{to}} 표시",
+      "page": "{{total}}페이지 중 {{current}}페이지",
+      "perPage": "페이지당 항목 수",
+      "first": "처음",
+      "last": "마지막",
+      "previous": "이전",
+      "next": "다음"
+    },
+    "search": "검색...",
+    "noResults": "결과 없음",
+    "loading": "로딩 중..."
+  },
+  "errors": {
+    "somethingWentWrong": "문제가 발생했습니다",
+    "pageNotFound": "페이지를 찾을 수 없습니다",
+    "unauthorized": "권한이 없습니다",
+    "tryAgain": "다시 시도"
+  },
+  "loading": "로딩 중...",
+  "copyright": "© {{year}} 귀사"
+}
