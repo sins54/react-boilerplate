@@ -4,6 +4,9 @@ export * from "./core";
 // Layout components
 export * from "./layout";
 
+// Layouts (page layouts)
+export * from "./layouts";
+
 // Data display components
 export * from "./data-display";
 
@@ -15,3 +18,6 @@ export * from "./overlay";
 
 // Form components
 export * from "./form";
+
+// Feedback components
+export * from "./feedback";

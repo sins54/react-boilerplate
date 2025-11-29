@@ -5,6 +5,7 @@ import {
 } from "@tanstack/react-query";
 import { apiPost, apiPut, apiPatch, apiDelete } from "../api/generic-api";
 import type { AxiosRequestConfig } from "axios";
+import type { ApiRequestMeta } from "../api/client";
 
 /**
  * HTTP methods supported by the generic mutation hook.
@@ -43,6 +44,12 @@ export interface UseGenericMutationOptions<T, D = unknown>
     error: Error | null,
     variables: MutationVariables<D>
   ) => void;
+  /** Disable automatic toast notifications for this mutation */
+  disableToast?: boolean;
+  /** Show success toast on successful mutation */
+  successToast?: boolean;
+  /** Custom success message for toast */
+  successMessage?: string;
 }
 
 /**
@@ -106,22 +113,40 @@ export function useGenericMutation<T, D = unknown>(
     invalidateKeys,
     axiosConfig,
     onSettled: userOnSettled,
+    disableToast,
+    successToast,
+    successMessage,
     ...mutationOptions
   } = options;
   const queryClient = useQueryClient();
 
+  // Build axios config with toast meta
+  const buildAxiosConfig = (): AxiosRequestConfig => {
+    const meta: ApiRequestMeta = {
+      disableToast,
+      successToast,
+      successMessage,
+    };
+
+    return {
+      ...axiosConfig,
+      meta,
+    };
+  };
+
   const mutationFn = async (variables: MutationVariables<D>): Promise<T> => {
     const fullUrl = variables.urlParams ? `${url}${variables.urlParams}` : url;
+    const config = buildAxiosConfig();
 
     switch (method) {
       case "POST":
-        return apiPost<T, D>(fullUrl, variables.data, axiosConfig);
+        return apiPost<T, D>(fullUrl, variables.data, config);
       case "PUT":
-        return apiPut<T, D>(fullUrl, variables.data, axiosConfig);
+        return apiPut<T, D>(fullUrl, variables.data, config);
       case "PATCH":
-        return apiPatch<T, D>(fullUrl, variables.data, axiosConfig);
+        return apiPatch<T, D>(fullUrl, variables.data, config);
       case "DELETE":
-        return apiDelete<T>(fullUrl, axiosConfig);
+        return apiDelete<T>(fullUrl, config);
       default:
         throw new Error(`Unsupported mutation method: ${method}`);
     }

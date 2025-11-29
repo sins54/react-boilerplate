@@ -2,7 +2,9 @@ import axios, {
   type AxiosInstance,
   type AxiosError,
   type InternalAxiosRequestConfig,
+  type AxiosResponse,
 } from "axios";
+import { toast } from "sonner";
 
 /**
  * Storage key for the authentication token.
@@ -45,6 +47,28 @@ export interface ApiError {
 }
 
 /**
+ * Extended Axios request config with toast metadata.
+ */
+export interface ApiRequestMeta {
+  /** Show success toast on successful response */
+  successToast?: boolean;
+  /** Custom success message (overrides default) */
+  successMessage?: string;
+  /** Disable all automatic toast notifications for this request */
+  disableToast?: boolean;
+}
+
+// Extend Axios types to include meta
+declare module "axios" {
+  interface InternalAxiosRequestConfig {
+    meta?: ApiRequestMeta;
+  }
+  interface AxiosRequestConfig {
+    meta?: ApiRequestMeta;
+  }
+}
+
+/**
  * Create and configure the Axios instance.
  */
 const createApiClient = (): AxiosInstance => {
@@ -73,11 +97,23 @@ const createApiClient = (): AxiosInstance => {
     }
   );
 
-  // Response interceptor - handle global errors
+  // Response interceptor - handle global errors and toast notifications
   client.interceptors.response.use(
-    (response) => response,
+    (response: AxiosResponse) => {
+      const meta = response.config.meta;
+
+      // Show success toast if enabled via meta flag
+      if (meta?.successToast && !meta?.disableToast) {
+        const message = meta.successMessage || "Operation completed successfully";
+        toast.success(message);
+      }
+
+      return response;
+    },
     (error: AxiosError<ApiError>) => {
       const status = error.response?.status;
+      const meta = error.config?.meta;
+      const shouldShowToast = !meta?.disableToast;
 
       if (status === 401) {
         // Unauthorized - clear token and redirect to login
@@ -85,16 +121,27 @@ const createApiClient = (): AxiosInstance => {
         // Dispatch a custom event for auth context to handle
         window.dispatchEvent(new CustomEvent("auth:unauthorized"));
       } else if (status === 403) {
-        // Forbidden - dispatch event for toast notification
+        const message =
+          error.response?.data?.message ||
+          "You do not have permission to perform this action";
+
+        // Show toast for forbidden errors
+        if (shouldShowToast) {
+          toast.error(message);
+        }
+
+        // Dispatch event for toast notification (legacy support)
         window.dispatchEvent(
           new CustomEvent("auth:forbidden", {
-            detail: {
-              message:
-                error.response?.data?.message ||
-                "You do not have permission to perform this action",
-            },
+            detail: { message },
           })
         );
+      } else if (status && status >= 500 && shouldShowToast) {
+        // Server error - show toast notification
+        const message =
+          error.response?.data?.message ||
+          "An unexpected server error occurred. Please try again later.";
+        toast.error(message);
       }
 
       return Promise.reject(error);
