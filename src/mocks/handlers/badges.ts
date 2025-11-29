@@ -146,6 +146,9 @@ export const badgeHandlers = [
       createdAt: new Date().toISOString(),
     };
 
+    // Persist the new badge
+    allBadges.push(newBadge);
+
     return HttpResponse.json(newBadge, { status: 201 });
   }),
 
@@ -169,6 +172,10 @@ export const badgeHandlers = [
     const body = (await request.json()) as Partial<Badge>;
     const updatedBadge: Badge = { ...badge, ...body, id: badge.id };
 
+    // Persist the update
+    const index = allBadges.findIndex((b) => b.id === id);
+    allBadges[index] = updatedBadge;
+
     return HttpResponse.json(updatedBadge, { status: 200 });
   }),
 
@@ -188,6 +195,9 @@ export const badgeHandlers = [
         { status: 404 }
       );
     }
+
+    // Remove the badge from the array
+    allBadges.splice(badgeIndex, 1);
 
     return HttpResponse.json(null, { status: 204 });
   }),
