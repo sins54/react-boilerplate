@@ -1,0 +1,16 @@
+{
+  "required": "{{field}}은(는) 필수입니다",
+  "email": "유효한 이메일 주소를 입력해주세요",
+  "min": "{{field}}은(는) 최소 {{min}}자 이상이어야 합니다",
+  "max": "{{field}}은(는) 최대 {{max}}자까지 가능합니다",
+  "number": "{{field}}은(는) 숫자여야 합니다",
+  "positive": "{{field}}은(는) 양수여야 합니다",
+  "integer": "{{field}}은(는) 정수여야 합니다",
+  "url": "유효한 URL을 입력해주세요",
+  "date": "유효한 날짜를 입력해주세요",
+  "passwordMismatch": "비밀번호가 일치하지 않습니다",
+  "invalidType": "입력 유형이 올바르지 않습니다",
+  "invalidFormat": "형식이 올바르지 않습니다",
+  "tooSmall": "값이 너무 작습니다",
+  "tooBig": "값이 너무 큽니다"
+}

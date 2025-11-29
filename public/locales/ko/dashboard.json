@@ -1,0 +1,16 @@
+{
+  "title": "대시보드",
+  "welcome": "환영합니다, {{name}}님!",
+  "overview": "개요",
+  "stats": {
+    "totalUsers": "총 사용자",
+    "activeProjects": "활성 프로젝트",
+    "revenue": "수익",
+    "growth": "성장"
+  },
+  "recent": {
+    "activity": "최근 활동",
+    "projects": "최근 프로젝트",
+    "users": "최근 사용자"
+  }
+}

@@ -6,6 +6,7 @@ import {
   type ReactNode,
 } from "react";
 import { Outlet, NavLink, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import * as Dialog from "@radix-ui/react-dialog";
 import {
   DropdownMenu,
@@ -15,6 +16,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuLabel,
 } from "@/components/navigation/DropdownMenu";
+import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useAuth, useCanAccessScreen } from "@/hooks/useAuth";
 import type { Screen } from "@/types/auth";
@@ -45,7 +47,8 @@ function useSidebar() {
 // ============================================================================
 
 interface NavItem {
-  label: string;
+  /** Translation key for the label (e.g., "navigation.dashboard") */
+  labelKey: string;
   href: string;
   screen: Screen;
   icon: ReactNode;
@@ -53,7 +56,7 @@ interface NavItem {
 
 const navigationItems: NavItem[] = [
   {
-    label: "Dashboard",
+    labelKey: "navigation.dashboard",
     href: "/dashboard",
     screen: "DASHBOARD",
     icon: (
@@ -66,7 +69,7 @@ const navigationItems: NavItem[] = [
     ),
   },
   {
-    label: "Badges",
+    labelKey: "navigation.badges",
     href: "/badges",
     screen: "BADGE",
     icon: (
@@ -76,7 +79,7 @@ const navigationItems: NavItem[] = [
     ),
   },
   {
-    label: "Projects",
+    labelKey: "navigation.projects",
     href: "/projects",
     screen: "PROJECT",
     icon: (
@@ -86,7 +89,7 @@ const navigationItems: NavItem[] = [
     ),
   },
   {
-    label: "Users",
+    labelKey: "navigation.users",
     href: "/users",
     screen: "USERS",
     icon: (
@@ -98,7 +101,7 @@ const navigationItems: NavItem[] = [
     ),
   },
   {
-    label: "Reports",
+    labelKey: "navigation.reports",
     href: "/reports",
     screen: "REPORTS",
     icon: (
@@ -108,7 +111,7 @@ const navigationItems: NavItem[] = [
     ),
   },
   {
-    label: "Settings",
+    labelKey: "navigation.settings",
     href: "/settings",
     screen: "SETTINGS",
     icon: (
@@ -185,6 +188,7 @@ interface SidebarNavItemProps {
 
 function SidebarNavItem({ item }: SidebarNavItemProps) {
   const { isCollapsed, setMobileOpen } = useSidebar();
+  const { t } = useTranslation("common");
   const location = useLocation();
   const canAccess = useCanAccessScreen(item.screen);
 
@@ -192,6 +196,7 @@ function SidebarNavItem({ item }: SidebarNavItemProps) {
   if (!canAccess) return null;
 
   const isActive = location.pathname === item.href || location.pathname.startsWith(`${item.href}/`);
+  const label = t(item.labelKey);
 
   return (
     <NavLink
@@ -202,11 +207,11 @@ function SidebarNavItem({ item }: SidebarNavItemProps) {
         backgroundColor: isActive ? "var(--color-primary)" : "transparent",
         color: isActive ? "var(--color-text-on-primary)" : "var(--color-text-secondary)",
       }}
-      title={isCollapsed ? item.label : undefined}
+      title={isCollapsed ? label : undefined}
     >
       <span className="flex-shrink-0">{item.icon}</span>
       {!isCollapsed && (
-        <span className="font-medium truncate">{item.label}</span>
+        <span className="font-medium truncate">{label}</span>
       )}
     </NavLink>
   );
@@ -218,6 +223,7 @@ function SidebarNavItem({ item }: SidebarNavItemProps) {
 
 function SidebarContent() {
   const { isCollapsed, toggleCollapsed } = useSidebar();
+  const { t } = useTranslation("common");
 
   return (
     <div className="flex flex-col h-full">
@@ -248,7 +254,7 @@ function SidebarContent() {
             className="font-semibold text-lg truncate"
             style={{ color: "var(--color-text)" }}
           >
-            App Name
+            {t("appName")}
           </span>
         )}
       </div>
@@ -272,7 +278,7 @@ function SidebarContent() {
             backgroundColor: "var(--color-surface-hover)",
             color: "var(--color-text-secondary)",
           }}
-          aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+          aria-label={isCollapsed ? t("navigation.expand") : t("navigation.collapse")}
         >
           <svg
             className={`w-5 h-5 transition-transform ${isCollapsed ? "rotate-180" : ""}`}
@@ -283,7 +289,7 @@ function SidebarContent() {
           >
             <path d="M11 19l-7-7 7-7M18 19l-7-7 7-7" />
           </svg>
-          {!isCollapsed && <span className="text-sm">Collapse</span>}
+          {!isCollapsed && <span className="text-sm">{t("navigation.collapse")}</span>}
         </button>
       </div>
     </div>
@@ -296,6 +302,7 @@ function SidebarContent() {
 
 function UserAvatarDropdown() {
   const { user, logout } = useAuth();
+  const { t } = useTranslation("common");
 
   const initials = user?.name
     ? user.name
@@ -349,14 +356,14 @@ function UserAvatarDropdown() {
             <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
             <circle cx="12" cy="7" r="4" />
           </svg>
-          Profile
+          {t("user.profile")}
         </DropdownMenuItem>
         <DropdownMenuItem>
           <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
             <circle cx="12" cy="12" r="3" />
             <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z" />
           </svg>
-          Settings
+          {t("user.settings")}
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={logout}>
@@ -365,7 +372,7 @@ function UserAvatarDropdown() {
             <polyline points="16 17 21 12 16 7" />
             <line x1="21" y1="12" x2="9" y2="12" />
           </svg>
-          Logout
+          {t("user.logout")}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
@@ -407,6 +414,7 @@ function Header() {
 
       {/* Right side actions */}
       <div className="flex items-center gap-2">
+        <LanguageSwitcher />
         <ThemeToggle />
         <UserAvatarDropdown />
       </div>
