@@ -52,6 +52,8 @@ export interface ServerTableProps<TData> extends BaseTableProps<TData> {
   data: TData[];
   /** Total number of pages */
   pageCount: number;
+  /** Total number of rows (for accurate pagination display) */
+  totalRows?: number;
   /** Whether data is loading */
   isLoading?: boolean;
   /** Callback when table state changes */

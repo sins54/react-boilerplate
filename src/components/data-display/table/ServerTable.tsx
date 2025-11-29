@@ -7,6 +7,7 @@ import {
   type ColumnFiltersState,
 } from "@tanstack/react-table";
 import { cn } from "../../../lib/utils";
+import { useDebounce } from "../../../hooks/useDebounce";
 import { TableFilterProvider } from "./TableFilterContext";
 import { TableToolbar } from "./TableToolbar";
 import { TablePagination } from "./TablePagination";
@@ -18,25 +19,6 @@ import { TableEmptyState } from "./TableEmptyState";
 import type { ServerTableProps, ServerTableState } from "./types";
 
 /**
- * Custom hook for debouncing values
- */
-function useDebounce<T>(value: T, delay: number): T {
-  const [debouncedValue, setDebouncedValue] = React.useState<T>(value);
-
-  React.useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedValue(value);
-    }, delay);
-
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [value, delay]);
-
-  return debouncedValue;
-}
-
-/**
  * Server-side data table with external state management.
  * Triggers callbacks when pagination, sorting, or filtering changes.
  *
@@ -46,12 +28,13 @@ function useDebounce<T>(value: T, delay: number): T {
  * @example
  * ```tsx
  * const [tableState, setTableState] = useState(initialState);
- * const { data, pageCount, isLoading } = useTableData(tableState);
+ * const { data, pageCount, totalRows, isLoading } = useTableData(tableState);
  *
  * <ServerTable
  *   data={data}
  *   columns={columns}
  *   pageCount={pageCount}
+ *   totalRows={totalRows}
  *   isLoading={isLoading}
  *   onStateChange={setTableState}
  * />
@@ -61,6 +44,7 @@ export function ServerTable<TData>({
   data,
   columns,
   pageCount,
+  totalRows,
   isLoading = false,
   onStateChange,
   initialState,
@@ -165,7 +149,8 @@ export function ServerTable<TData>({
     onResetFilters?.();
   };
 
-  const totalRows = pageCount * pagination.pageSize;
+  // Use totalRows from props if provided, otherwise estimate from pageCount
+  const displayTotalRows = totalRows ?? pageCount * pagination.pageSize;
 
   return (
     <TableFilterProvider>
@@ -209,7 +194,7 @@ export function ServerTable<TData>({
           <TablePagination
             pageIndex={pagination.pageIndex}
             pageSize={pagination.pageSize}
-            totalRows={totalRows}
+            totalRows={displayTotalRows}
             pageCount={pageCount}
             canPreviousPage={pagination.pageIndex > 0}
             canNextPage={pagination.pageIndex < pageCount - 1}

@@ -28,14 +28,25 @@ interface Product {
   lastUpdated: string;
 }
 
+// Constants for data generation
+const BASE_PRICE = 9.99;
+const MAX_PRICE_RANGE = 500;
+const TOTAL_PRODUCTS = 500;
+
 // Generate deterministic pseudo-random numbers
 function seededRandom(seed: number): number {
   const x = Math.sin(seed) * 10000;
   return x - Math.floor(x);
 }
 
-// Generate a large dataset (simulating a database)
-function generateFullDataset(): Product[] {
+// Generate a large dataset (simulating a database) - lazy initialization
+let cachedDataset: Product[] | null = null;
+
+function getFullDataset(): Product[] {
+  if (cachedDataset) {
+    return cachedDataset;
+  }
+
   const categories = [
     "Electronics",
     "Clothing",
@@ -77,7 +88,7 @@ function generateFullDataset(): Product[] {
 
   const data: Product[] = [];
 
-  for (let i = 0; i < 500; i++) {
+  for (let i = 0; i < TOTAL_PRODUCTS; i++) {
     const seed = i + 1;
     const adjective = adjectives[Math.floor(seededRandom(seed) * adjectives.length)];
     const noun = nouns[Math.floor(seededRandom(seed * 2) * nouns.length)];
@@ -88,7 +99,7 @@ function generateFullDataset(): Product[] {
       id: `PRD-${String(i + 1).padStart(6, "0")}`,
       name: `${adjective} ${noun} ${i + 1}`,
       category,
-      price: Math.floor(seededRandom(seed * 5) * 500) + 9.99,
+      price: Math.floor(seededRandom(seed * 5) * MAX_PRICE_RANGE) + BASE_PRICE,
       stock: status === "out_of_stock" ? 0 : Math.floor(seededRandom(seed * 6) * 1000),
       status,
       lastUpdated: new Date(
@@ -99,6 +110,7 @@ function generateFullDataset(): Product[] {
     });
   }
 
+  cachedDataset = data;
   return data;
 }
 
@@ -117,9 +129,6 @@ interface FetchProductsResponse {
   total: number;
 }
 
-// Full dataset (simulating a database)
-const fullDataset = generateFullDataset();
-
 function simulateFetchProducts(
   params: FetchProductsParams
 ): Promise<FetchProductsResponse> {
@@ -128,6 +137,7 @@ function simulateFetchProducts(
     const delay = 300 + Math.random() * 500;
 
     setTimeout(() => {
+      const fullDataset = getFullDataset();
       let filteredData = [...fullDataset];
 
       // Apply global filter
@@ -386,6 +396,7 @@ function FilterForm() {
 export default function ServerTablePage() {
   const [data, setData] = React.useState<Product[]>([]);
   const [pageCount, setPageCount] = React.useState(0);
+  const [totalRows, setTotalRows] = React.useState(0);
   const [isLoading, setIsLoading] = React.useState(true);
   const [requestCount, setRequestCount] = React.useState(0);
 
@@ -404,6 +415,7 @@ export default function ServerTablePage() {
 
     setData(result.data);
     setPageCount(result.pageCount);
+    setTotalRows(result.total);
     setIsLoading(false);
   }, []);
 
@@ -502,6 +514,7 @@ export default function ServerTablePage() {
           data={data}
           columns={columns}
           pageCount={pageCount}
+          totalRows={totalRows}
           isLoading={isLoading}
           onStateChange={fetchData}
           initialPageSize={10}
