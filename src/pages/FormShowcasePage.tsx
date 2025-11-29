@@ -170,9 +170,9 @@ export default function FormShowcasePage() {
       preferredLanguage: "",
       skills: [],
       interests: [],
-      acceptTerms: undefined as unknown as true,
+      acceptTerms: false as boolean as true, // Initial unchecked state, validated as literal true
       notifications: [],
-      experience: undefined as unknown as "junior",
+      experience: "" as FormValues["experience"], // Initial empty, validated as enum
       newsletter: false,
       darkMode: false,
       birthDate: "",
