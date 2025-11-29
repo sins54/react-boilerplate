@@ -1,0 +1,29 @@
+{
+  "pageTitle": "किचन सिंक डेमो",
+  "pageDescription": "प्रमाणीकरण, RBAC, API, MSW, i18n, फारमहरू, तालिकाहरू र थिम एकीकरण प्रदर्शन",
+  "createBadge": "ब्याज बनाउनुहोस्",
+  "createBadgeTitle": "नयाँ ब्याज बनाउनुहोस्",
+  "createBadgeDescription": "नयाँ ब्याज बनाउन विवरण भर्नुहोस्",
+  "badgeName": "ब्याज नाम",
+  "badgeNamePlaceholder": "ब्याज नाम प्रविष्ट गर्नुहोस्",
+  "badgeStatus": "स्थिति",
+  "badgeStatusPlaceholder": "स्थिति चयन गर्नुहोस्",
+  "statusActive": "सक्रिय",
+  "statusInactive": "निष्क्रिय",
+  "statusPending": "पेन्डिङ",
+  "table": {
+    "title": "ब्याजहरू",
+    "description": "सर्भर-साइड पेजिनेशन र सॉर्टिंगसँग आफ्ना ब्याजहरू व्यवस्थापन गर्नुहोस्",
+    "columnId": "आईडी",
+    "columnName": "नाम",
+    "columnStatus": "स्थिति",
+    "columnCreatedAt": "सिर्जना मिति",
+    "searchPlaceholder": "ब्याज खोज्नुहोस्..."
+  },
+  "success": {
+    "badgeCreated": "ब्याज सफलतापूर्वक सिर्जना गरियो"
+  },
+  "error": {
+    "badgeCreationFailed": "ब्याज सिर्जना गर्न असफल"
+  }
+}

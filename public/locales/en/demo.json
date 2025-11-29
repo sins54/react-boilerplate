@@ -1,0 +1,29 @@
+{
+  "pageTitle": "Kitchen Sink Demo",
+  "pageDescription": "Demonstrating Auth, RBAC, API, MSW, i18n, Forms, Tables, and Theme integration",
+  "createBadge": "Create Badge",
+  "createBadgeTitle": "Create New Badge",
+  "createBadgeDescription": "Fill in the details to create a new badge",
+  "badgeName": "Badge Name",
+  "badgeNamePlaceholder": "Enter badge name",
+  "badgeStatus": "Status",
+  "badgeStatusPlaceholder": "Select status",
+  "statusActive": "Active",
+  "statusInactive": "Inactive",
+  "statusPending": "Pending",
+  "table": {
+    "title": "Badges",
+    "description": "Manage your badges with server-side pagination and sorting",
+    "columnId": "ID",
+    "columnName": "Name",
+    "columnStatus": "Status",
+    "columnCreatedAt": "Created At",
+    "searchPlaceholder": "Search badges..."
+  },
+  "success": {
+    "badgeCreated": "Badge created successfully"
+  },
+  "error": {
+    "badgeCreationFailed": "Failed to create badge"
+  }
+}

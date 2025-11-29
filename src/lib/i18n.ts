@@ -17,7 +17,7 @@ export const supportedLanguageCodes = supportedLanguages.map((l) => l.code);
 /**
  * Available namespaces for translations
  */
-export const namespaces = ["common", "auth", "validation", "dashboard"] as const;
+export const namespaces = ["common", "auth", "validation", "dashboard", "demo"] as const;
 
 export type SupportedLanguage = (typeof supportedLanguageCodes)[number];
 export type Namespace = (typeof namespaces)[number];

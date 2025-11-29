@@ -22,6 +22,8 @@ const FULL_PERMISSIONS: Permission[] = [
   { screen: 'SETTINGS', privilege: 'VIEW' },
   { screen: 'SETTINGS', privilege: 'CONFIGURE' },
   { screen: 'REPORTS', privilege: 'VIEW' },
+  { screen: 'DEMO', privilege: 'VIEW' },
+  { screen: 'DEMO', privilege: 'CREATE' },
 ];
 
 /**

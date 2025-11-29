@@ -6,6 +6,7 @@ import { ProtectedRoute } from "./ProtectedRoute";
 
 // Lazy-loaded page components for code splitting
 const ShowcasePage = lazy(() => import("@/pages/ShowcasePage"));
+const KitchenSinkPage = lazy(() => import("@/pages/demo/KitchenSinkPage"));
 
 // Loading fallback component
 function PageLoader() {
@@ -188,6 +189,21 @@ export function AppRoutes() {
             <Suspense fallback={<PageLoader />}>
               <ShowcasePage />
             </Suspense>
+          }
+        />
+
+        {/* 
+         * Kitchen Sink Demo - demonstrates all boilerplate systems
+         * Requires DEMO screen with VIEW privilege
+         */}
+        <Route
+          path="/demo/kitchen-sink"
+          element={
+            <ProtectedRoute screen="DEMO" privilege="VIEW">
+              <Suspense fallback={<PageLoader />}>
+                <KitchenSinkPage />
+              </Suspense>
+            </ProtectedRoute>
           }
         />
       </Route>
