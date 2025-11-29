@@ -32,12 +32,15 @@ interface BadgesResponse {
   };
 }
 
+// Default status for new badges
+const DEFAULT_BADGE_STATUS = "pending" as const;
+
 // Form schema with i18n validation messages
 function useCreateBadgeSchema() {
   const { t } = useTranslation("validation");
   
   return React.useMemo(() => z.object({
-    name: z.string().min(1, t("required", { field: "Name" })).min(3, t("min", { field: "Name", min: 3 })),
+    name: z.string().min(3, t("min", { field: "Name", min: 3 })),
     status: z.enum(["active", "inactive", "pending"], {
       message: t("required", { field: "Status" }),
     }),
@@ -59,7 +62,7 @@ function CreateBadgeModal({ onSuccess }: { onSuccess: () => void }) {
     resolver: zodResolver(schema),
     defaultValues: {
       name: "",
-      status: "pending",
+      status: DEFAULT_BADGE_STATUS,
     },
   });
 

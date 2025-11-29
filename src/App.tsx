@@ -202,6 +202,11 @@ function App() {
                   </Suspense>
                 } 
               />
+              {/* 
+                Kitchen Sink Demo - accessible without auth for development.
+                See AppRoutes.tsx for the production-ready protected version
+                that requires DEMO:VIEW permission.
+              */}
               <Route 
                 path="/demo/kitchen-sink" 
                 element={
