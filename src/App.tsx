@@ -2,9 +2,12 @@ import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthProvider } from './context/AuthContext';
+import { Toaster, GlobalErrorBoundary } from './components/feedback';
 import DesignSystemPage from './pages/DesignSystemPage';
 import ComponentShowcasePage from './pages/ComponentShowcasePage';
 import FormShowcasePage from './pages/FormShowcasePage';
+import LoginDemoPage from './pages/LoginDemoPage';
+import DashboardDemoPage from './pages/DashboardDemoPage';
 
 // Lazy-loaded pages for code splitting
 const ShowcasePage = lazy(() => import('./pages/ShowcasePage'));
@@ -101,6 +104,28 @@ function HomePage() {
         >
           Showcase (Demo) →
         </Link>
+        <Link 
+          to="/login-demo"
+          className="px-6 py-3 rounded-lg font-medium transition-colors border"
+          style={{ 
+            backgroundColor: 'var(--color-surface)',
+            color: 'var(--color-text)',
+            borderColor: 'var(--color-border)'
+          }}
+        >
+          Auth Layout Demo →
+        </Link>
+        <Link 
+          to="/dashboard-demo"
+          className="px-6 py-3 rounded-lg font-medium transition-colors border"
+          style={{ 
+            backgroundColor: 'var(--color-surface)',
+            color: 'var(--color-text)',
+            borderColor: 'var(--color-border)'
+          }}
+        >
+          Dashboard Layout Demo →
+        </Link>
       </div>
     </div>
   );
@@ -110,22 +135,27 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/design-system" element={<DesignSystemPage />} />
-            <Route path="/components" element={<ComponentShowcasePage />} />
-            <Route path="/forms" element={<FormShowcasePage />} />
-            <Route 
-              path="/showcase" 
-              element={
-                <Suspense fallback={<PageLoader />}>
-                  <ShowcasePage />
-                </Suspense>
-              } 
-            />
-          </Routes>
-        </BrowserRouter>
+        <GlobalErrorBoundary>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/design-system" element={<DesignSystemPage />} />
+              <Route path="/components" element={<ComponentShowcasePage />} />
+              <Route path="/forms" element={<FormShowcasePage />} />
+              <Route path="/login-demo" element={<LoginDemoPage />} />
+              <Route path="/dashboard-demo" element={<DashboardDemoPage />} />
+              <Route 
+                path="/showcase" 
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <ShowcasePage />
+                  </Suspense>
+                } 
+              />
+            </Routes>
+          </BrowserRouter>
+          <Toaster />
+        </GlobalErrorBoundary>
       </AuthProvider>
     </QueryClientProvider>
   );
