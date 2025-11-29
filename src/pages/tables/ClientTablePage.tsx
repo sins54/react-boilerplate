@@ -2,9 +2,9 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import { type ColumnDef } from "@tanstack/react-table";
 import { ArrowLeft, MoreHorizontal, Mail, Phone, Building2 } from "lucide-react";
-import { ClientTable } from "../../components/data-display/table";
-import { Button } from "../../components/overlay/Button";
-import { Badge } from "../../components/data-display/Badge";
+import { ClientTable } from "@/components/data-display/table";
+import { Button } from "@/components/overlay/Button";
+import { Badge } from "@/components/data-display/Badge";
 
 // Types for our demo data
 interface User {

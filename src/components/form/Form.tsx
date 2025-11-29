@@ -5,7 +5,7 @@ import {
   type FieldValues,
   type SubmitHandler,
 } from "react-hook-form";
-import { cn } from "../../lib/utils";
+import { cn } from "@/lib/utils";
 
 export interface FormProps<TFieldValues extends FieldValues>
   extends Omit<React.FormHTMLAttributes<HTMLFormElement>, "onSubmit"> {

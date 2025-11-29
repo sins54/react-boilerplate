@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 import type { ReactNode } from "react";
-import { useAuth } from "../hooks/useAuth";
-import type { Screen, Privilege, Permission } from "../types/auth";
+import { useAuth } from "@/hooks/useAuth";
+import type { Screen, Privilege, Permission } from "@/types/auth";
 
 /**
  * Props for the ProtectedRoute component.

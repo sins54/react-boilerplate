@@ -6,8 +6,8 @@ import {
   type PaginationState,
   type ColumnFiltersState,
 } from "@tanstack/react-table";
-import { cn } from "../../../lib/utils";
-import { useDebounce } from "../../../hooks/useDebounce";
+import { cn } from "@/lib/utils";
+import { useDebounce } from "@/hooks/useDebounce";
 import { TableFilterProvider } from "./TableFilterContext";
 import { TableToolbar } from "./TableToolbar";
 import { TablePagination } from "./TablePagination";

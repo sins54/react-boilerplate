@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useFormContext, Controller } from "react-hook-form";
-import { cn } from "../../lib/utils";
+import { cn } from "@/lib/utils";
 import { FormFieldWrapper, inputStyleProps, inputErrorStyleProps } from "./FormFieldWrapper";
 
 export interface MultiSelectOption {

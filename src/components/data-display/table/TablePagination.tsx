@@ -1,6 +1,6 @@
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react";
-import { Button } from "../../overlay/Button";
-import { cn } from "../../../lib/utils";
+import { Button } from "@/components/overlay/Button";
+import { cn } from "@/lib/utils";
 
 export interface TablePaginationProps {
   /** Current page index (0-based) */

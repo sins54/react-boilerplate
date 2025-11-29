@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
-import type { Screen, Privilege } from "../types/auth";
+import { AuthContext } from "@/context/AuthContext";
+import type { Screen, Privilege } from "@/types/auth";
 
 /**
  * Hook to access the auth context.

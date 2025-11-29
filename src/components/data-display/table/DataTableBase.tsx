@@ -5,7 +5,7 @@ import {
   type Row,
 } from "@tanstack/react-table";
 import { ArrowUpDown, ArrowUp, ArrowDown } from "lucide-react";
-import { cn } from "../../../lib/utils";
+import { cn } from "@/lib/utils";
 
 export interface DataTableBaseProps<TData> {
   /** TanStack Table instance */

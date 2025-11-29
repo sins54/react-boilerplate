@@ -1,5 +1,5 @@
-import { DashboardLayout } from "../components/layouts/DashboardLayout";
-import { SectionErrorBoundary } from "../components/feedback/SectionErrorBoundary";
+import { DashboardLayout } from "@/components/layouts/DashboardLayout";
+import { SectionErrorBoundary } from "@/components/feedback/SectionErrorBoundary";
 import { toast } from "sonner";
 
 /**

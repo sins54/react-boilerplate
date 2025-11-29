@@ -7,7 +7,7 @@ import {
   CardContent,
   CardFooter,
 } from './Card'
-import { Button } from '../overlay/Button'
+import { Button } from '@/components/overlay/Button'
 
 const meta = {
   title: 'Data Display/Card',

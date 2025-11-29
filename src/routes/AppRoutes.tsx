@@ -5,7 +5,7 @@ import { PrivateRoute } from "./PrivateRoute";
 import { ProtectedRoute } from "./ProtectedRoute";
 
 // Lazy-loaded page components for code splitting
-const ShowcasePage = lazy(() => import("../pages/ShowcasePage"));
+const ShowcasePage = lazy(() => import("@/pages/ShowcasePage"));
 
 // Loading fallback component
 function PageLoader() {
