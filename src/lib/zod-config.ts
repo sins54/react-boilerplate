@@ -43,7 +43,8 @@ z.config({
 
     // Handle invalid format (email, url, etc.) - Zod v4 uses invalid_format
     if (ctx.code === "invalid_format") {
-      const format = (ctx as { format?: string }).format;
+      // Safely access format property which exists on invalid_format issues
+      const format = "format" in ctx ? (ctx as { format: string }).format : undefined;
       if (format === "email") {
         return i18n.t("validation:email");
       }

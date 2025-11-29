@@ -8,7 +8,7 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Suspense fallback={
       <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: 'var(--color-bg)' }}>
-        <div className="text-center">
+        <div className="text-center" role="status" aria-label="Loading translations">
           <div
             className="w-8 h-8 border-4 rounded-full animate-spin mx-auto mb-4"
             style={{
