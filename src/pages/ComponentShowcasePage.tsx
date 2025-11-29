@@ -50,7 +50,7 @@ import {
   TooltipContent,
   TooltipProvider,
   Button,
-} from "../components";
+} from "@/components";
 
 /**
  * Component Library Showcase

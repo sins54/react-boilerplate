@@ -3,7 +3,7 @@ import {
   type UseQueryOptions,
   type QueryKey,
 } from "@tanstack/react-query";
-import { apiGet } from "../api/generic-api";
+import { apiGet } from "@/api/generic-api";
 import type { AxiosRequestConfig } from "axios";
 
 /**

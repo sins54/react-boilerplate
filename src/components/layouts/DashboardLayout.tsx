@@ -14,10 +14,10 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuLabel,
-} from "../navigation/DropdownMenu";
-import { useLocalStorage } from "../../hooks/useLocalStorage";
-import { useAuth, useCanAccessScreen } from "../../hooks/useAuth";
-import type { Screen } from "../../types/auth";
+} from "@/components/navigation/DropdownMenu";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { useAuth, useCanAccessScreen } from "@/hooks/useAuth";
+import type { Screen } from "@/types/auth";
 
 // ============================================================================
 // Sidebar Context

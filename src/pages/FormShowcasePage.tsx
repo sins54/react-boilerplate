@@ -2,7 +2,7 @@ import * as React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link } from "react-router-dom";
-import { z } from "../lib/zod-config";
+import { z } from "@/lib/zod-config";
 import {
   Form,
   Input,
@@ -17,7 +17,7 @@ import {
   FileUpload,
   ImageUpload,
   AutoComplete,
-} from "../components/form";
+} from "@/components/form";
 
 // Complex Zod schema demonstrating nested objects, arrays, and various validations
 const formSchema = z.object({

@@ -1,24 +1,25 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { AuthProvider } from './context/AuthContext';
-import { Toaster, GlobalErrorBoundary } from './components/feedback';
-import DesignSystemPage from './pages/DesignSystemPage';
-import ComponentShowcasePage from './pages/ComponentShowcasePage';
-import FormShowcasePage from './pages/FormShowcasePage';
-import LoginDemoPage from './pages/LoginDemoPage';
-import DashboardDemoPage from './pages/DashboardDemoPage';
+import { AuthProvider } from '@/context/AuthContext';
+import { Toaster, GlobalErrorBoundary } from '@/components/feedback';
+import DesignSystemPage from '@/pages/DesignSystemPage';
+import ComponentShowcasePage from '@/pages/ComponentShowcasePage';
+import FormShowcasePage from '@/pages/FormShowcasePage';
+import LoginDemoPage from '@/pages/LoginDemoPage';
+import DashboardDemoPage from '@/pages/DashboardDemoPage';
 
 // Lazy-loaded pages for code splitting
-const ShowcasePage = lazy(() => import('./pages/ShowcasePage'));
-const ClientTablePage = lazy(() => import('./pages/tables/ClientTablePage'));
-const ServerTablePage = lazy(() => import('./pages/tables/ServerTablePage'));
+const ShowcasePage = lazy(() => import('@/pages/ShowcasePage'));
+const ClientTablePage = lazy(() => import('@/pages/tables/ClientTablePage'));
+const ServerTablePage = lazy(() => import('@/pages/tables/ServerTablePage'));
 
 // Create query client with sensible defaults
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 5 * 60 * 1000, // 5 minutes
+      gcTime: 10 * 60 * 1000, // 10 minutes
       retry: 1,
       refetchOnWindowFocus: false,
     },

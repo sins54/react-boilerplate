@@ -1,6 +1,6 @@
 import { X } from "lucide-react";
-import { Badge } from "../Badge";
-import { cn } from "../../../lib/utils";
+import { Badge } from "@/components/data-display/Badge";
+import { cn } from "@/lib/utils";
 
 export interface ActiveFilter {
   /** Unique filter identifier */

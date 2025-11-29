@@ -11,8 +11,8 @@ import type {
   Permission,
   Screen,
   Privilege,
-} from "../types/auth";
-import { getAuthToken, setAuthToken, removeAuthToken } from "../api/client";
+} from "@/types/auth";
+import { getAuthToken, setAuthToken, removeAuthToken } from "@/api/client";
 
 /**
  * Auth context value interface.

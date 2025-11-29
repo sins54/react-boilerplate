@@ -13,9 +13,9 @@ import {
 import {
   ServerTable,
   type ServerTableState,
-} from "../../components/data-display/table";
-import { Button } from "../../components/overlay/Button";
-import { Badge } from "../../components/data-display/Badge";
+} from "@/components/data-display/table";
+import { Button } from "@/components/overlay/Button";
+import { Badge } from "@/components/data-display/Badge";
 
 // Types for our demo data
 interface Product {

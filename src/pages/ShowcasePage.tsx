@@ -54,7 +54,7 @@ import {
   TooltipContent,
   TooltipProvider,
   Button,
-} from "../components";
+} from "@/components";
 
 type Theme = "light" | "dark" | "system";
 

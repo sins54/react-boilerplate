@@ -8,7 +8,7 @@ import {
   type SortingState,
   type ColumnFiltersState,
 } from "@tanstack/react-table";
-import { cn } from "../../../lib/utils";
+import { cn } from "@/lib/utils";
 import { TableFilterProvider } from "./TableFilterContext";
 import { TableToolbar } from "./TableToolbar";
 import { TablePagination } from "./TablePagination";

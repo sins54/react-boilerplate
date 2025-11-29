@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Search, Filter } from "lucide-react";
-import { Button } from "../../overlay/Button";
-import { cn } from "../../../lib/utils";
+import { Button } from "@/components/overlay/Button";
+import { cn } from "@/lib/utils";
 import { useTableFilter } from "./TableFilterContext";
 
 export interface TableToolbarProps {

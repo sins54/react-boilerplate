@@ -3,9 +3,9 @@ import {
   type UseMutationOptions,
   useQueryClient,
 } from "@tanstack/react-query";
-import { apiPost, apiPut, apiPatch, apiDelete } from "../api/generic-api";
+import { apiPost, apiPut, apiPatch, apiDelete } from "@/api/generic-api";
 import type { AxiosRequestConfig } from "axios";
-import type { ApiRequestMeta } from "../api/client";
+import type { ApiRequestMeta } from "@/api/client";
 
 /**
  * HTTP methods supported by the generic mutation hook.
