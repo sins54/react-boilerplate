@@ -51,12 +51,16 @@ export function useOnClickOutside<T extends HTMLElement = HTMLElement>(
 
     const listener = (event: MouseEvent | TouchEvent) => {
       const refs = Array.isArray(ref) ? ref : [ref];
+      const target = event.target;
 
       // Check if click is inside any of the refs
+      // Guard against null target (edge case in some browsers)
+      if (!target || !(target instanceof Node)) return;
+
       const isInside = refs.some((r) => {
         const element = r.current;
         if (!element) return false;
-        return element.contains(event.target as Node);
+        return element.contains(target);
       });
 
       if (!isInside) {
