@@ -262,7 +262,8 @@ function main() {
   
   // Report statistics
   const globalCount = tokens.global ? Object.keys(tokens.global).reduce((acc, key) => {
-    return acc + Object.keys(tokens.global[key] || {}).length;
+    const categoryTokens = tokens.global[key];
+    return acc + Object.keys(categoryTokens || {}).length;
   }, 0) : 0;
   const lightCount = tokens.light?.colors ? Object.keys(tokens.light.colors).length : 0;
   const darkCount = tokens.dark?.colors ? Object.keys(tokens.dark.colors).length : 0;
