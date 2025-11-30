@@ -1,0 +1,29 @@
+{
+  "pageTitle": "키친 싱크 데모",
+  "pageDescription": "인증, RBAC, API, MSW, i18n, 양식, 테이블 및 테마 통합 시연",
+  "createBadge": "뱃지 만들기",
+  "createBadgeTitle": "새 뱃지 만들기",
+  "createBadgeDescription": "뱃지를 만들려면 세부 정보를 입력하세요",
+  "badgeName": "뱃지 이름",
+  "badgeNamePlaceholder": "뱃지 이름을 입력하세요",
+  "badgeStatus": "상태",
+  "badgeStatusPlaceholder": "상태를 선택하세요",
+  "statusActive": "활성",
+  "statusInactive": "비활성",
+  "statusPending": "대기 중",
+  "table": {
+    "title": "뱃지",
+    "description": "서버 측 페이지네이션 및 정렬로 뱃지를 관리하세요",
+    "columnId": "ID",
+    "columnName": "이름",
+    "columnStatus": "상태",
+    "columnCreatedAt": "생성일",
+    "searchPlaceholder": "뱃지 검색..."
+  },
+  "success": {
+    "badgeCreated": "뱃지가 성공적으로 생성되었습니다"
+  },
+  "error": {
+    "badgeCreationFailed": "뱃지 생성에 실패했습니다"
+  }
+}
