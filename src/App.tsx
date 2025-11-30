@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthProvider } from '@/context/AuthContext';
 import { Toaster, GlobalErrorBoundary } from '@/components/feedback';
@@ -9,11 +9,40 @@ import FormShowcasePage from '@/pages/FormShowcasePage';
 import LoginDemoPage from '@/pages/LoginDemoPage';
 import DashboardDemoPage from '@/pages/DashboardDemoPage';
 
+// Pulse HR imports
+import { PulseLayout } from '@/components/pulse-hr/common';
+import {
+  LoginPage as PulseLoginPage,
+  DashboardPage as PulseDashboardPage,
+  AttendancePage,
+  LeavePage,
+  ProjectsPage,
+  ReportsPage,
+  ApprovalsPage,
+  UsersPage,
+} from '@/pages/pulse-hr';
+import { useAuthStore } from '@/stores';
+
 // Lazy-loaded pages for code splitting
 const ShowcasePage = lazy(() => import('@/pages/ShowcasePage'));
 const ClientTablePage = lazy(() => import('@/pages/tables/ClientTablePage'));
 const ServerTablePage = lazy(() => import('@/pages/tables/ServerTablePage'));
 const KitchenSinkPage = lazy(() => import('@/pages/demo/KitchenSinkPage'));
+
+// Pulse HR Protected Route
+function PulseProtectedRoute({ children, adminOnly = false }: { children: React.ReactNode; adminOnly?: boolean }) {
+  const { isAuthenticated, isAdmin, user } = useAuthStore();
+
+  if (!isAuthenticated || !user) {
+    return <Navigate to="/pulse/login" replace />;
+  }
+
+  if (adminOnly && !isAdmin()) {
+    return <Navigate to="/pulse" replace />;
+  }
+
+  return <>{children}</>;
+}
 
 // Create query client with sensible defaults
 const queryClient = new QueryClient({
@@ -67,12 +96,24 @@ function HomePage() {
         Modern React boilerplate with Tailwind CSS v4
       </p>
       <div className="flex gap-4 flex-wrap justify-center">
+        {/* Pulse HR - Primary CTA */}
+        <Link 
+          to="/pulse"
+          className="px-8 py-4 rounded-lg font-bold text-lg transition-colors shadow-lg"
+          style={{ 
+            backgroundColor: 'var(--color-primary)',
+            color: 'var(--color-text-on-primary)'
+          }}
+        >
+          🚀 Launch Pulse HR →
+        </Link>
         <Link 
           to="/design-system"
           className="px-6 py-3 rounded-lg font-medium transition-colors"
           style={{ 
-            backgroundColor: 'var(--color-primary)',
-            color: 'var(--color-text-on-primary)'
+            backgroundColor: 'var(--color-surface)',
+            color: 'var(--color-text)',
+            borderColor: 'var(--color-border)'
           }}
         >
           View Design System →
@@ -215,6 +256,40 @@ function App() {
                   </Suspense>
                 } 
               />
+
+              {/* Pulse HR Routes */}
+              <Route path="/pulse/login" element={<PulseLoginPage />} />
+              <Route
+                path="/pulse"
+                element={
+                  <PulseProtectedRoute>
+                    <PulseLayout />
+                  </PulseProtectedRoute>
+                }
+              >
+                <Route index element={<PulseDashboardPage />} />
+                <Route path="attendance" element={<AttendancePage />} />
+                <Route path="leave" element={<LeavePage />} />
+                <Route path="projects" element={<ProjectsPage />} />
+                <Route path="projects/:projectId" element={<ProjectsPage />} />
+                <Route path="reports" element={<ReportsPage />} />
+                <Route
+                  path="approvals"
+                  element={
+                    <PulseProtectedRoute adminOnly>
+                      <ApprovalsPage />
+                    </PulseProtectedRoute>
+                  }
+                />
+                <Route
+                  path="users"
+                  element={
+                    <PulseProtectedRoute adminOnly>
+                      <UsersPage />
+                    </PulseProtectedRoute>
+                  }
+                />
+              </Route>
             </Routes>
           </BrowserRouter>
           <Toaster />
