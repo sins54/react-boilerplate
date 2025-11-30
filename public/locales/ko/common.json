@@ -10,7 +10,9 @@
     "close": "닫기",
     "confirm": "확인",
     "back": "뒤로",
-    "next": "다음"
+    "next": "다음",
+    "reset": "초기화",
+    "apply": "적용"
   },
   "navigation": {
     "dashboard": "대시보드",
@@ -41,13 +43,24 @@
     "pagination": {
       "showing": "총 {{total}}개 중 {{from}}-{{to}} 표시",
       "page": "{{total}}페이지 중 {{current}}페이지",
-      "perPage": "페이지당 항목 수",
-      "first": "처음",
-      "last": "마지막",
-      "previous": "이전",
-      "next": "다음"
+      "perPage": "페이지당 행 수",
+      "first": "첫 페이지",
+      "last": "마지막 페이지",
+      "previous": "이전 페이지",
+      "next": "다음 페이지"
     },
     "search": "검색...",
+    "filter": "필터",
+    "filters": {
+      "title": "필터",
+      "description": "결과 범위를 좁히기 위한 필터를 설정하세요",
+      "apply": "필터 적용",
+      "reset": "초기화"
+    },
+    "empty": {
+      "title": "데이터 없음",
+      "description": "현재 표시할 레코드가 없습니다."
+    },
     "noResults": "결과 없음",
     "loading": "로딩 중..."
   },
@@ -55,6 +68,8 @@
     "somethingWentWrong": "문제가 발생했습니다",
     "pageNotFound": "페이지를 찾을 수 없습니다",
     "unauthorized": "권한이 없습니다",
+    "forbidden": "접근 거부",
+    "forbiddenDescription": "이 페이지에 접근할 권한이 없습니다.",
     "tryAgain": "다시 시도"
   },
   "loading": "로딩 중...",

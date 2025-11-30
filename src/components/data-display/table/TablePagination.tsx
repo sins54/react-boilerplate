@@ -1,4 +1,5 @@
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/overlay/Button";
 import { cn } from "@/lib/utils";
 
@@ -49,6 +50,7 @@ export function TablePagination({
   pageSizeOptions = [10, 20, 30, 50, 100],
   className,
 }: TablePaginationProps) {
+  const { t } = useTranslation("common");
   const startRow = pageIndex * pageSize + 1;
   const endRow = Math.min((pageIndex + 1) * pageSize, totalRows);
 
@@ -65,14 +67,14 @@ export function TablePagination({
           className="text-[length:var(--text-sm)]"
           style={{ color: "var(--color-text-secondary)" }}
         >
-          Showing {totalRows > 0 ? startRow : 0} to {endRow} of {totalRows} results
+          {t("table.pagination.showing", { from: totalRows > 0 ? startRow : 0, to: endRow, total: totalRows })}
         </span>
         <div className="flex items-center gap-[length:var(--spacing-2)]">
           <span
             className="text-[length:var(--text-sm)]"
             style={{ color: "var(--color-text-secondary)" }}
           >
-            Rows per page:
+            {t("table.pagination.perPage")}:
           </span>
           <select
             value={pageSize}
@@ -104,7 +106,7 @@ export function TablePagination({
           className="text-[length:var(--text-sm)] mr-[length:var(--spacing-2)]"
           style={{ color: "var(--color-text-secondary)" }}
         >
-          Page {pageIndex + 1} of {pageCount || 1}
+          {t("table.pagination.page", { current: pageIndex + 1, total: pageCount || 1 })}
         </span>
         <Button
           variant="outline"
@@ -114,7 +116,7 @@ export function TablePagination({
           className="h-8 w-8"
         >
           <ChevronsLeft className="h-4 w-4" />
-          <span className="sr-only">First page</span>
+          <span className="sr-only">{t("table.pagination.first")}</span>
         </Button>
         <Button
           variant="outline"
@@ -124,7 +126,7 @@ export function TablePagination({
           className="h-8 w-8"
         >
           <ChevronLeft className="h-4 w-4" />
-          <span className="sr-only">Previous page</span>
+          <span className="sr-only">{t("table.pagination.previous")}</span>
         </Button>
         <Button
           variant="outline"
@@ -134,7 +136,7 @@ export function TablePagination({
           className="h-8 w-8"
         >
           <ChevronRight className="h-4 w-4" />
-          <span className="sr-only">Next page</span>
+          <span className="sr-only">{t("table.pagination.next")}</span>
         </Button>
         <Button
           variant="outline"
@@ -144,7 +146,7 @@ export function TablePagination({
           className="h-8 w-8"
         >
           <ChevronsRight className="h-4 w-4" />
-          <span className="sr-only">Last page</span>
+          <span className="sr-only">{t("table.pagination.last")}</span>
         </Button>
       </div>
     </div>

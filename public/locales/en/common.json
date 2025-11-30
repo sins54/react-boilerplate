@@ -10,7 +10,9 @@
     "close": "Close",
     "confirm": "Confirm",
     "back": "Back",
-    "next": "Next"
+    "next": "Next",
+    "reset": "Reset",
+    "apply": "Apply"
   },
   "navigation": {
     "dashboard": "Dashboard",
@@ -41,13 +43,24 @@
     "pagination": {
       "showing": "Showing {{from}} to {{to}} of {{total}} results",
       "page": "Page {{current}} of {{total}}",
-      "perPage": "Items per page",
-      "first": "First",
-      "last": "Last",
-      "previous": "Previous",
-      "next": "Next"
+      "perPage": "Rows per page",
+      "first": "First page",
+      "last": "Last page",
+      "previous": "Previous page",
+      "next": "Next page"
     },
     "search": "Search...",
+    "filter": "Filter",
+    "filters": {
+      "title": "Filters",
+      "description": "Configure filters to narrow down results",
+      "apply": "Apply Filters",
+      "reset": "Reset"
+    },
+    "empty": {
+      "title": "No data found",
+      "description": "There are no records to display at this time."
+    },
     "noResults": "No results found",
     "loading": "Loading..."
   },
@@ -55,6 +68,8 @@
     "somethingWentWrong": "Something went wrong",
     "pageNotFound": "Page not found",
     "unauthorized": "Unauthorized",
+    "forbidden": "Access Denied",
+    "forbiddenDescription": "You don't have permission to access this page.",
     "tryAgain": "Try again"
   },
   "loading": "Loading...",
