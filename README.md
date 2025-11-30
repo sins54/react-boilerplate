@@ -30,7 +30,7 @@ Get up and running in under 5 minutes.
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/your-org/react-boilerplate.git
+git clone <repository-url>
 cd react-boilerplate
 
 # 2. Install dependencies
@@ -139,6 +139,8 @@ For detailed information on specific topics, refer to these specialized guides:
 | [Internationalization](./docs/I18N.md) | Multi-language support, adding translations, and Zod integration |
 | [Testing Guide](./docs/TESTING.md) | Vitest configuration, testing patterns, and best practices |
 | [Storybook Guide](./docs/STORYBOOK.md) | Component documentation, writing stories, and deployment |
+
+> **Note:** `DESIGN-SYSTEM.md` is located in the project root for quick access. All other documentation files are in the `docs/` directory.
 
 ---
 
