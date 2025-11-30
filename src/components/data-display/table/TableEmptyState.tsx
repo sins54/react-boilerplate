@@ -1,5 +1,6 @@
 import * as React from "react";
 import { FileQuestion } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
 
 export interface TableEmptyStateProps {
@@ -19,12 +20,16 @@ export interface TableEmptyStateProps {
  * Empty state component for when table has no data
  */
 export function TableEmptyState({
-  title = "No data found",
-  description = "There are no records to display at this time.",
+  title,
+  description,
   icon,
   action,
   className,
 }: TableEmptyStateProps) {
+  const { t } = useTranslation("common");
+  const displayTitle = title ?? t("table.empty.title");
+  const displayDescription = description ?? t("table.empty.description");
+
   return (
     <div
       className={cn(
@@ -47,13 +52,13 @@ export function TableEmptyState({
         className="text-[length:var(--text-lg)] font-[number:var(--font-semibold)] mb-[length:var(--spacing-2)]"
         style={{ color: "var(--color-text)" }}
       >
-        {title}
+        {displayTitle}
       </h3>
       <p
         className="text-[length:var(--text-sm)] text-center max-w-sm mb-[length:var(--spacing-4)]"
         style={{ color: "var(--color-text-muted)" }}
       >
-        {description}
+        {displayDescription}
       </p>
       {action}
     </div>

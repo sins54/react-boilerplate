@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Search, Filter } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/overlay/Button";
 import { cn } from "@/lib/utils";
 import { useTableFilter } from "./TableFilterContext";
@@ -29,14 +30,16 @@ export interface TableToolbarProps {
 export function TableToolbar({
   searchValue = "",
   onSearchChange,
-  searchPlaceholder = "Search...",
+  searchPlaceholder,
   hideSearch = false,
   hideFilter = false,
   hasActiveFilters = false,
   rightContent,
   className,
 }: TableToolbarProps) {
+  const { t } = useTranslation("common");
   const { toggleFilter } = useTableFilter();
+  const placeholder = searchPlaceholder ?? t("table.search");
 
   return (
     <div
@@ -57,7 +60,7 @@ export function TableToolbar({
               type="text"
               value={searchValue}
               onChange={(e) => onSearchChange?.(e.target.value)}
-              placeholder={searchPlaceholder}
+              placeholder={placeholder}
               className={cn(
                 "w-full pl-10 pr-[length:var(--spacing-4)] py-[length:var(--spacing-2)]",
                 "text-[length:var(--text-sm)]",
@@ -88,7 +91,7 @@ export function TableToolbar({
             )}
           >
             <Filter className="h-4 w-4 mr-2" />
-            Filter
+            {t("table.filter")}
             {hasActiveFilters && (
               <span
                 className="absolute -top-1 -right-1 h-2 w-2 rounded-full"

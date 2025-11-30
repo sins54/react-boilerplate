@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/overlay/Button";
 import { cn } from "@/lib/utils";
 import { useTableFilter } from "./TableFilterContext";
@@ -22,13 +23,16 @@ export interface FilterSheetProps {
  * Filter sheet component - a right-side slider panel for filters
  */
 export function FilterSheet({
-  title = "Filters",
-  description = "Configure filters to narrow down results",
+  title,
+  description,
   children,
   onApply,
   onReset,
 }: FilterSheetProps) {
+  const { t } = useTranslation("common");
   const { isFilterOpen, closeFilter } = useTableFilter();
+  const displayTitle = title ?? t("table.filters.title");
+  const displayDescription = description ?? t("table.filters.description");
 
   return (
     <DialogPrimitive.Root open={isFilterOpen} onOpenChange={(open) => !open && closeFilter()}>
@@ -64,13 +68,13 @@ export function FilterSheet({
                 className="text-[length:var(--text-lg)] font-[number:var(--font-semibold)]"
                 style={{ color: "var(--color-text)" }}
               >
-                {title}
+                {displayTitle}
               </DialogPrimitive.Title>
               <DialogPrimitive.Description
                 className="text-[length:var(--text-sm)] mt-[length:var(--spacing-1)]"
                 style={{ color: "var(--color-text-muted)" }}
               >
-                {description}
+                {displayDescription}
               </DialogPrimitive.Description>
             </div>
             <DialogPrimitive.Close asChild>
@@ -93,7 +97,7 @@ export function FilterSheet({
           >
             {onReset && (
               <Button variant="outline" onClick={onReset}>
-                Reset
+                {t("table.filters.reset")}
               </Button>
             )}
             {onApply && (
@@ -103,7 +107,7 @@ export function FilterSheet({
                   closeFilter();
                 }}
               >
-                Apply Filters
+                {t("table.filters.apply")}
               </Button>
             )}
           </div>
