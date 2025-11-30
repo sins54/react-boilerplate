@@ -12,7 +12,8 @@
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "generate-tokens": "node scripts/generate-tokens.js"
   },
   "dependencies": {
     "@faker-js/faker": "^10.1.0",
