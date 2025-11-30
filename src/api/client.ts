@@ -13,13 +13,15 @@ const AUTH_TOKEN_KEY = "auth_token";
 
 /**
  * Storage key for the current organization ID.
+ * Note: This must match the key used in src/features/nexus/store/storage.ts
  */
 const ORG_ID_KEY = "nexus_org_id";
 
 /**
  * Get the current organization ID from localStorage.
+ * This is read directly to avoid circular dependencies with the store.
  */
-export const getCurrentOrgId = (): string | null => {
+const getCurrentOrgId = (): string | null => {
   if (typeof window === "undefined") return null;
   return localStorage.getItem(ORG_ID_KEY);
 };

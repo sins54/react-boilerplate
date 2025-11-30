@@ -27,8 +27,6 @@ import type {
 function generateOrganizations(): Organization[] {
   faker.seed(100);
   
-  const plans: Organization['plan'][] = ['free', 'starter', 'professional', 'enterprise'];
-  
   return [
     {
       id: 'org-001',
@@ -61,7 +59,7 @@ function generateOrganizations(): Organization[] {
       id: 'org-004',
       name: 'Startup Labs',
       slug: 'startup-labs',
-      plan: plans[Math.floor(Math.random() * plans.length)],
+      plan: 'free',
       createdAt: faker.date.recent({ days: 90 }).toISOString(),
       memberCount: 5,
     },

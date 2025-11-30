@@ -85,6 +85,21 @@ export function OrganizationSwitcher({ forceOpen = false, onSelect }: Organizati
     }
   };
 
+  const getPlanBadgeBgStyle = (plan: Organization['plan']): React.CSSProperties => {
+    const color = getPlanBadgeColor(plan);
+    // Use rgba fallback for broader browser support
+    switch (plan) {
+      case 'enterprise':
+        return { backgroundColor: 'rgba(59, 130, 246, 0.15)', color };
+      case 'professional':
+        return { backgroundColor: 'rgba(34, 197, 94, 0.15)', color };
+      case 'starter':
+        return { backgroundColor: 'rgba(234, 179, 8, 0.15)', color };
+      default:
+        return { backgroundColor: 'rgba(107, 114, 128, 0.15)', color };
+    }
+  };
+
   return (
     <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
       {/* Trigger button (shows current org or prompt to select) */}
@@ -213,10 +228,7 @@ export function OrganizationSwitcher({ forceOpen = false, onSelect }: Organizati
                   {/* Plan badge */}
                   <span
                     className="text-xs px-2 py-1 rounded-full font-medium uppercase"
-                    style={{
-                      backgroundColor: `color-mix(in srgb, ${getPlanBadgeColor(org.plan)} 15%, transparent)`,
-                      color: getPlanBadgeColor(org.plan),
-                    }}
+                    style={getPlanBadgeBgStyle(org.plan)}
                   >
                     {org.plan}
                   </span>

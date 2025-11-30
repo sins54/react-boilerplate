@@ -21,9 +21,17 @@ export function useOrganization() {
 
 /**
  * Hook to get just the current org ID (for use in API calls).
- * Returns null if no org is selected.
+ * Returns the context value if available, otherwise falls back to localStorage.
+ * When context exists, always uses context state to avoid stale data.
  */
 export function useCurrentOrgId(): string | null {
   const context = useContext(OrganizationContext);
-  return context?.currentOrg?.id ?? getStoredOrgId();
+  
+  // If context is available, use context state (even if null) to avoid stale localStorage data
+  if (context !== null) {
+    return context.currentOrg?.id ?? null;
+  }
+  
+  // Only fall back to localStorage when there's no context (e.g., outside provider)
+  return getStoredOrgId();
 }
