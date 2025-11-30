@@ -12,6 +12,19 @@ import { toast } from "sonner";
 const AUTH_TOKEN_KEY = "auth_token";
 
 /**
+ * Storage key for the current organization ID.
+ */
+const ORG_ID_KEY = "nexus_org_id";
+
+/**
+ * Get the current organization ID from localStorage.
+ */
+export const getCurrentOrgId = (): string | null => {
+  if (typeof window === "undefined") return null;
+  return localStorage.getItem(ORG_ID_KEY);
+};
+
+/**
  * Get the authentication token from localStorage.
  */
 export const getAuthToken = (): string | null => {
@@ -80,7 +93,7 @@ const createApiClient = (): AxiosInstance => {
     },
   });
 
-  // Request interceptor - attach Authorization header
+  // Request interceptor - attach Authorization header and x-org-id header
   client.interceptors.request.use(
     (config: InternalAxiosRequestConfig) => {
       // Allow overriding the token via config headers
@@ -90,6 +103,16 @@ const createApiClient = (): AxiosInstance => {
           config.headers.Authorization = `Bearer ${token}`;
         }
       }
+      
+      // Inject x-org-id header if an organization is selected
+      // Allow overriding via config headers
+      if (!config.headers['x-org-id']) {
+        const orgId = getCurrentOrgId();
+        if (orgId) {
+          config.headers['x-org-id'] = orgId;
+        }
+      }
+      
       return config;
     },
     (error: AxiosError) => {
